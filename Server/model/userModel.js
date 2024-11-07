@@ -1,48 +1,40 @@
-const mongoose=require("mongoose")
-
-const userSchema=mongoose.Schema(
-
-    {
-        email:{
-            type:String,
-            require:[true,"please add your email"]
-        },
-        firstname:{
-            type:String,
-            require:[true,"please add your name"]
-        },
-        lastname:{
-            type:String,
-            require:[true,"please add your lastname"]
-        },
-        age:{
-            type:Number,
-            require:[true,"please add your age"]
-        },
-        bloodgroup:{
-            type:String,
-            require:[true,"please add your bloodgroup"]
-        },
-        gender:{
-            type:String,
-            require:[true,"please add your gender"]
-        },
-        phonenumber:{
-            type:Number,
-            require:[true,"please add your phonenumber"]
-        },
-        password:{
-            type:String,
-            require:[true,"please add your password"]
-        }
-    
-
-
+const mongoose = require("mongoose");
+const userSchema = mongoose.Schema({
+    firstName:{
+        type : String , 
+        require : [ true , "please add your name"],
     },
-    {
-        timestamps:true,
-    }
-
-)
-
-const User=mongoose.model('User',userSchema)
+    lastName:{
+        type : String , 
+        require : [ true , "please add your last name"],
+    },
+    email:{
+        type : String , 
+        require : [ true , "please add your last name"],
+    },
+    age:{
+        type : Number , 
+        require : [ true , "please add your age"],
+    },
+    bloodGroup:{
+        type : String , 
+        require : [ true , "please add your bloodgroup"],
+    },
+    gender:{
+        type : String , 
+        require : [ true , "please add your gender"],
+    },
+    phoneNumber:{
+        type : Number , 
+        require : [ true , "please add your phone number"],
+    },
+    password:{
+        type : String,
+        require : [ true , "please add your passwprd"],
+    },
+   
+},
+{
+    timestamps : true ,
+});
+module.exports = mongoose.model("User" , userSchema);
