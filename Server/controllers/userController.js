@@ -1,6 +1,6 @@
 const asyncHandler=require("express-async-handler")
 const bcrypt=require("bcrypt")
-const User=require("../models/userModel")
+const User=require("../model/userModel")
 require("dotenv").config()
 
 const registerUser=asyncHandler(async(req,res)=>{

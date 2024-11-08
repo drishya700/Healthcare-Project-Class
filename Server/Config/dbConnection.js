@@ -1,8 +1,6 @@
-//mongoose module require maane package install karna padega
+const mongoose=require("mongoose")
 
-import mongoose from "mongoose";
-
-export const connectDb=async()=>{
+const connectDb=async()=>{
     try{
         const connect = await mongoose.connect(process.env.CONNECTION_STRING)
         console.log("Connected to mongo")
@@ -10,4 +8,5 @@ export const connectDb=async()=>{
         console.log(error)
     }
 }
-export default connectDb;
+
+module.exports = connectDb;

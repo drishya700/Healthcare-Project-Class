@@ -1,6 +1,6 @@
 const express = require("express");
 const connectDb = require("./config/dbConnection");
-const errorHandler = require("./middlewares/errorHandler");
+const errorHandler = require("./middleware/errorHandler");
 const cors= require("cors");
 const hbs = require("hbs");
 const path = require("path");
@@ -9,16 +9,16 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 // const upload = multer({ dest : 'uploads/'})
 const mongoose = require("mongoose");
 const doctorsDetails = require("./routes/doctorsDetails");
-const Profie= require("./model/Profie")
+const Profie= require("./model/Profile")
 const app = express();
 app.use(express.static("public"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const users = [
-    { name: "Harman Dhiman", age: 20 },
-    { name: "Hindveer", age: 19 },
-    { name: "Jaikirat", age: 20 },
+    { name: "Drishya Sood", age: 20 },
+    { name: "Rohan Dahiya", age: 19 },
+    { name: "Jashan Dhaliwal", age: 20 },
 ];
 
 const port = 3000 || 5000;
@@ -36,7 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 app.get("/home",(req , res)=>{
     res.render("home" , {
-       username:" Harman Dhiman",
+       username:" Drishya Sood",
        posts : " time pass"
     })
 })
