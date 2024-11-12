@@ -9,7 +9,8 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 // const upload = multer({ dest : 'uploads/'})
 const mongoose = require("mongoose");
 const doctorsDetails = require("./routes/doctorsDetails");
-const Profie= require("./model/Profile")
+const Profie= require("./model/Profile");
+const userRouter = require("./routes/userRoutes");
 const app = express();
 app.use(express.static("public"));
 
@@ -100,8 +101,8 @@ app.get("/profile",async(req,res)=>{
 // });
 
 //register route
-app.use("/api/register" , require("./routes/userRoutes"));
-app.use("/api/doctors", doctorsDetails);
-app.listen(port , ()=>{
+app.use("/api/user", userRouter);
+// app.use("/api/doctors", doctorsDetails);
+app.listen(port , () => {
     console.log(`server running on http://localhost:${port}`);
 })
