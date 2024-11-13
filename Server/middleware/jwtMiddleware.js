@@ -1,40 +1,31 @@
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-const generateToken=(userData)=>{
-    return jwt.sign(userData,process.env.PRIVATE_KEY)
-}
 
-const validatejwtToken=(req,res,next)=>{
-    //first we are checking that jwt token is available or not.
+
+const validateJwtToken = (req, res, next) => {
     const authorization = req.headers.authorization;
-    //Output 1. Bearer jsnadjlasndf
-    //Output 2. dskajdfhasjldhlskan
-    //Output 3. 
-    //Output 4. TOKEN BANA HE NAHI H, LOCAL HO YA ENDPOINT TESTING SE BHEJA HO,WITHOUT TOKEN HEADER SEND KARA H
-
-    if(!authorization){
-        return res.status(401).json
-        ({err:'Token not available'})
+    if (!authorization) {
+        console.log("Authorization header missing"); // Debugging log
+        return res.status(401).json({ err: 'Token not available' });
     }
-    const token=req.headers.authorization.split(' ')[1]
 
-    if(!token){
-        return res.status(401).json({err:'Unauthorized User'});
+    const token = authorization.split(' ')[1];
+    if (!token) {
+        console.log("Token not found after splitting header"); // Debugging log
+        return res.status(401).json({ err: 'Unauthorized User' });
     }
-    try{
 
-        // in this error handler try catch : we are handling , if token is validated or verified , then move to next middleware or respond back to client.
-        const validateToken=jwt.verify(token,process.env.PRIVATE_KEY);
-
-        req.user=validateToken;
+    try {
+        const validateToken = jwt.verify(token, process.env.PRIVATE_KEY);
+        req.user = validateToken;
+        console.log("Token validated successfully:", validateToken); // Debug log
         next();
-        
+    } catch (err) {
+        console.log("Error validating token:", err.message); // Debugging log
+        return res.status(401).json({ err: 'Invalid or expired token' });
+    } 
+};
 
-        } catch(err){
-            console.error("Error Occured: ")
-        }
-    }
-
-    module.exports={generateToken,validateJwtToken}
+module.exports = { validateJwtToken };
 
 

@@ -102,6 +102,7 @@ app.get("/profile",async(req,res)=>{
 
 //register route
 app.use("/api/user", userRouter);
+// app.use("/api/newsletter" , require("./routes/newsLetterRoutes"));
 // app.use("/api/doctors", doctorsDetails);
 app.listen(port , () => {
     console.log(`server running on http://localhost:${port}`);
